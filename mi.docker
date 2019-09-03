@@ -1,0 +1,17 @@
+FROM ubuntu:18.04
+
+MAINTAINER mahrukhfida@simula.no
+
+#COPY files/* /opt/monroe/
+RUN apt-get update 
+RUN apt-get install -y python3 python3-netifaces python3-zmq 
+RUN apt-get install -y joe less psmisc mlocate bash-completion && updatedb
+RUN apt-get install -y python-pip
+RUN apt-get install build-essential g++
+RUN pip install pyserial crcmod xmltodict
+#RUN echo "export TERM=vt100" >>/root/.bashrc
+RUN apt-get clean
+ADD  ./mi ./
+RUN "/install-docker.sh"
+ 
+#ENTRYPOINT ["dumb-init", "--", "/usr/bin/python2.7", "/opt/monroe/mi_launcher"]
